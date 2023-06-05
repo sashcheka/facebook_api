@@ -1,5 +1,3 @@
-Certainly! Here's an example of documentation in a Markdown (.md) file for the provided code:
-
 # Facebook Page Access Token Retrieval
 
 This code retrieves the access token for a Facebook Page using the Facebook Graph API.
