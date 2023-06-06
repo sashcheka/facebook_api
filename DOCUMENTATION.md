@@ -44,5 +44,3 @@ The code will print the response JSON object, which includes the access token fo
 
 - Ensure that the access token used has the necessary permissions to access the Page's information.
 - This code utilizes the `requests` library to send HTTP requests to the Facebook Graph API.
-
-Feel free to customize this documentation to suit your needs, add additional information, or provide usage examples.
