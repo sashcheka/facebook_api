@@ -13,13 +13,13 @@ page_id_zovofficial = pages_access_tokens['zovofficial']['page_id']
 access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
 
 
-url = f'https://graph.facebook.com/{page_id_minskworld}/insights'
+url = f'https://graph.facebook.com/{page_id_zovofficial}/insights'
 
 params = {
     'date_present': 'last_30d',
     'period': 'day',
     'metric': 'page_impressions_unique, page_post_engagements',
-    'access_token': access_token_minskworld
+    'access_token': access_token_zovofficial
 }
 
 empty_json = {}
