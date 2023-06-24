@@ -1,9 +1,12 @@
-import json
 import pandas as pd
-
 import requests
-from resource.resource import *
+import json
 
+
+with open('../resource/app_access_token.json', 'r') as file:
+    app_access_token = json.load(file)
+with open('../resource/pages_access_tokens.json', 'r') as file:
+    pages_access_tokens = json.load(file)
 
 page_id_galereyavkusaby = pages_access_tokens['galereyavkusaby']['page_id']
 access_token_galereyavkusaby = pages_access_tokens['galereyavkusaby']['access_token']

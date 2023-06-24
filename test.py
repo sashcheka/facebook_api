@@ -1,8 +1,12 @@
 import requests
 import json
 from datetime import datetime, timedelta
-from resource.resource import *
 
+
+with open('../resource/app_access_token.json', 'r') as file:
+    app_access_token = json.load(file)
+with open('../resource/pages_access_tokens.json', 'r') as file:
+    pages_access_tokens = json.load(file)
 
 access_token = app_access_token['access_token']  # galereyavkusaby
 page_id = '17841403111140815'
