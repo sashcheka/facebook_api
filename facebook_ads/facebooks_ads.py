@@ -4,6 +4,7 @@ import json
 
 
 # variables
+# https://supermetrics.com/api/getFields?ds=FA
 with open('../resource/app_access_token.json', 'r') as file:
     app_access_token = json.load(file)
 with open('../resource/pages_access_tokens.json', 'r') as file:
@@ -15,6 +16,7 @@ minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['
 
 
 # ads_ids
+# https://developers.facebook.com/docs/marketing-api/reference/ad-account/ads/#overview
 url = f'https://graph.facebook.com/v17.0/act_{minskworld_business_entity_managing_ads_id}/ads'
 effective_status = "ACTIVE, \
                     PAUSED, \
@@ -52,8 +54,9 @@ with open('facebook_ads_assets/minskworld_facebook_ads_ids.json', 'w') as file:
 
 
 # ad_insights
+# https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
+# https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
 ad_id = 23855178258010270
-
 url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
 params = {
     'date_preset': 'this_month',
@@ -68,6 +71,8 @@ with open('facebook_ads_assets/minskworld_facebook_ad_insights.json', 'w') as fi
 
 
 # ad_creatives_id/ids
+# https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
+# https://developers.facebook.com/docs/marketing-api/reference/ad-creative/#overview
 response = requests.get(f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives',
                         params={'access_token': access_token_minskworld}).json()
 ad_creative_id = response['data'][0]['id']
@@ -98,6 +103,7 @@ with open('facebook_ads_assets/minskworld_facebook_ad_creative_preview.json', 'w
 
 
 # ad_info
+# https://developers.facebook.com/docs/marketing-api/reference/adgroup#overview
 url = f'https://graph.facebook.com/v17.0/{ad_id}'
 params = {
     'fields': 'effective_status, adset_id',
@@ -110,6 +116,7 @@ with open('facebook_ads_assets/minskworld_facebook_ad_info.json', 'w') as file:
 
 
 # ad_set_info
+# https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
 ad_set_id = response['adset_id']
 
 url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
@@ -125,6 +132,7 @@ with open('facebook_ads_assets/minskworld_facebook_ad_set_info.json', 'w') as fi
 
 
 # ad_preview
+# https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
 url = f'https://graph.facebook.com/v17.0/{ad_id}/previews'
 params = {
     'ad_format': 'DESKTOP_FEED_STANDARD',
