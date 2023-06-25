@@ -33,13 +33,37 @@ with open('facebook_ads_assets/minskworld_facebook_ad_set_info.json', 'w') as fi
 business_entity_managing_ads_id = 503789717866797
 
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/ads'
+effective_status = "ACTIVE, \
+                    PAUSED, \
+                    DELETED, \
+                    PENDING_REVIEW, \
+                    DISAPPROVED, \
+                    PREAPPROVED, \
+                    PENDING_BILLING_INFO, \
+                    CAMPAIGN_PAUSED, \
+                    ARCHIVED, \
+                    ADSET_PAUSED, \
+                    IN_PROCESS, \
+                    WITH_ISSUES"
 
 params = {
     'date_preset': 'this_month',
+    'limit': 25,
+    'effective_status': '["ACTIVE"]',
     'access_token': access_token_minskworld
 }
 
 response = requests.get(url, params=params).json()
+
+try:
+    while True:
+        url_next = response['paging']['next']
+        response_next = requests.get(url_next).json()
+        response = response['data'] + response_next['data']
+except Exception as error:
+    print(error)
+
+response = {'data': response}
 with open('facebook_ads_assets/minskworld_facebook_ads_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 
