@@ -56,18 +56,48 @@ with open('facebook_ads_assets/minskworld_facebook_ads_ids.json', 'w') as file:
 # ad_insights
 # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
 # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
-ad_id = 23855178258010270
+# ad_id = 23855178258010270
+# ad_id = 23855288155950270
+ad_id = 23855176629960270
 url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
 params = {
     'date_preset': 'this_month',
     'time_increment': 1,
-    'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
+    'fields': 'ad_name, reach, full_view_reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
     'access_token': access_token_minskworld
 }
 
 response = requests.get(url, params=params).json()
 with open('facebook_ads_assets/minskworld_facebook_ad_insights.json', 'w') as file:
     json.dump(response, file, indent=3)
+
+facebook_ad_insights_data = response['data']
+df = pd.json_normalize(facebook_ad_insights_data)
+df = df.drop(columns=['actions', 'cost_per_action_type'])
+
+data_list = []
+for entry in facebook_ad_insights_data:
+    entry_dict = {
+        "ad_name": entry["ad_name"],
+        "reach": entry["reach"],
+        "impressions": entry["impressions"],
+        "spend": entry["spend"],
+        "date_start": entry["date_start"],
+        "date_stop": entry["date_stop"],
+    }
+
+    for action in entry["actions"]:
+        entry_dict[f"actions_{action['action_type']}"] = action["value"]
+
+    for action in entry["cost_per_action_type"]:
+        entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
+    data_list.append(entry_dict)
+
+df_actions = pd.DataFrame(data_list)
+df_actions.fillna(0, inplace=True)
+df_actions.insert(0, 'ad_id', ad_id)
+df_actions = df_actions.rename(columns=lambda x: x.replace('.', '_'))
+df_actions.to_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_actions.csv', index=False)
 
 
 # ad_creatives_id/ids
@@ -142,3 +172,5 @@ params = {
 response = requests.get(url, params=params).json()
 with open('facebook_ads_assets/minskworld_facebook_ad_preview.json', 'w') as file:
     json.dump(response, file, indent=3)
+
+print('done')
