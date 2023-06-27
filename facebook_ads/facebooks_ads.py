@@ -1,4 +1,5 @@
 import pandas as pd
+import sqlalchemy
 import requests
 import json
 import time
@@ -92,6 +93,10 @@ for ad_id in ads_ids:
 
             for action in entry["cost_per_action_type"]:
                 entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
+        except Exception as error:
+            print(error, ad_id)
+
+        try:
             data_list.append(entry_dict)
         except Exception as error:
             print(error, ad_id)
@@ -175,9 +180,21 @@ for ad_id in ads_ids:
     df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
 
-df.fillna(0, inplace=True)
+# df.fillna('0', inplace=True)
 df = df.rename(columns=lambda x: x.replace('.', '_'))
 df.to_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv', index=False)
+df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d': 'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
+
+
+# table_name = 'minskworld_facebook_ads_insights'
+# engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
+# inspector = sqlalchemy.inspect(engine)
+# if not inspector.has_table(table_name):
+#     df.head(0).to_sql(table_name, engine, if_exists='replace', index=False)
+# df.to_sql(table_name, engine, if_exists='replace', index=False)
+# print(f'{table_name} loaded to database')
+
+
 end_time = time.time()
 execution_time = end_time - start_time
 print(f'Execution time: {execution_time} seconds')
