@@ -1,10 +1,12 @@
 import pandas as pd
 import requests
 import json
+import time
 
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
+start_time = time.time()
 with open('../resource/app_access_token.json', 'r') as file:
     app_access_token = json.load(file)
 with open('../resource/pages_access_tokens.json', 'r') as file:
@@ -170,10 +172,12 @@ for ad_id in ads_ids:
     # with open('facebook_ads_assets/minskworld_facebook_ad_preview.json', 'w') as file:
     #     json.dump(response, file, indent=3)
 
-    df = df.concat([df, df_ad_insights], ignore_index=True)
+    df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
 
 df.fillna(0, inplace=True)
 df = df.rename(columns=lambda x: x.replace('.', '_'))
 df.to_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv', index=False)
-print('done')
+end_time = time.time()
+execution_time = end_time - start_time
+print(f'Execution time: {execution_time} seconds')
