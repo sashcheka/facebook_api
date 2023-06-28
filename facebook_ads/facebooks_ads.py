@@ -16,6 +16,7 @@ with open('../resource/pages_access_tokens.json', 'r') as file:
 page_id_minskworld = pages_access_tokens['minskworld']['page_id']
 access_token_minskworld = pages_access_tokens['minskworld']['access_token']
 minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
+user_access_token = 'EAACZC4GqObNsBACBbOgCuQiiAX9Exd3YXK2Kj1devD9taW2zAv0XkhhHQZCjAIZCYNe8X5TArZB685q9ZAo8DroeiOGd2wHtAt04ME3pPXZCuvn4wLC82lYS2sZCxiX8CunWCZBi1Pss4M5K9lLa450jfnQQxOqTxw0ttL3ZBPh0TbcZC7xxQz5nFe'
 
 
 # ads_ids
@@ -167,18 +168,25 @@ for ad_id in ads_ids:
 
     # ad_preview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
-    # url = f'https://graph.facebook.com/v17.0/{ad_id}/previews'
-    # params = {
-    #     'ad_format': 'DESKTOP_FEED_STANDARD',
-    #     'access_token': access_token_minskworld
-    # }
-    #
-    # response = requests.get(url, params=params).json()
-    # with open('facebook_ads_assets/minskworld_facebook_ad_preview.json', 'w') as file:
-    #     json.dump(response, file, indent=3)
+    url = f'https://graph.facebook.com/v17.0/{ad_id}/previews'
+    params = {
+        'ad_format': 'DESKTOP_FEED_STANDARD',
+        'access_token': user_access_token
+    }
+
+    response = requests.get(url, params=params).json()
+    with open('facebook_ads_assets/minskworld_facebook_ad_preview.json', 'w') as file:
+        json.dump(response, file, indent=3)
+    body = response['data'][0]['body']
+    link_start = body.find('src="') + 5
+    link_end = body.find('"', link_start)
+    ad_preview_link = body[link_start:link_end]
+    ad_preview_link = ad_preview_link.replace(';', '&')
+    df_ad_insights['ad_preview_link'] = ad_preview_link
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
+    break
 
 # df.fillna('0', inplace=True)
 df = df.rename(columns=lambda x: x.replace('.', '_'))
