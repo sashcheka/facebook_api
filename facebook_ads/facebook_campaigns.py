@@ -25,7 +25,7 @@ minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['
 url = f'https://graph.facebook.com/v17.0/act_{minskworld_business_entity_managing_ads_id}/campaigns'
 params = {
     'date_preset': 'this_month',
-    'effective_status': '["ACTIVE"]',
+    'effective_status': '["ACTIVE", "PAUSED"]',
     'access_token': access_token_minskworld
 }
 
@@ -103,7 +103,7 @@ for campaign_id in campaings_ids:
     url = f'https://graph.facebook.com/v17.0/{campaign_id}/adsets'
     params = {
         'date_preset': 'this_month',
-        'effective_status': '["ACTIVE"]',
+        'effective_status': '["ACTIVE", "PAUSED"]',
         'access_token': access_token_minskworld
     }
 
@@ -114,18 +114,22 @@ for campaign_id in campaings_ids:
 
     # campaign_ad_set_info
     # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
-    ad_set_id = response['data'][0]['id']
-    url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
-    params = {
-        'date_preset': 'this_month',
-        'fields': 'optimization_goal',
-        'access_token': access_token_minskworld
-    }
+    try:
+        ad_set_id = response['data'][0]['id']
+        url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
+        params = {
+            'date_preset': 'this_month',
+            'fields': 'optimization_goal',
+            'access_token': access_token_minskworld
+        }
 
-    response = requests.get(url, params=params).json()
-    with open('facebook_campaings_assets/minskworld_facebook_campaign_set_info.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    df_campaign_insights['optimization_goal'] = response['optimization_goal']
+        response = requests.get(url, params=params).json()
+        with open('facebook_campaings_assets/minskworld_facebook_campaign_set_info.json', 'w') as file:
+            json.dump(response, file, indent=3)
+        df_campaign_insights['optimization_goal'] = response['optimization_goal']
+    except Exception as error:
+        print(error, campaign_id)
+
     df = pd.concat([df, df_campaign_insights], ignore_index=True)
     print(campaign_id)
 
@@ -135,8 +139,8 @@ df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conver
 df.to_csv('facebook_campaings_assets/minskworld_facebook_campaign_insights_df_campaign_insights.csv', index=False)
 
 
-df = pd.read_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv')
-# table_name = 'minskworld_facebook_ads_insights'
+df = pd.read_csv('facebook_campaings_assets/minskworld_facebook_campaign_insights_df_campaign_insights.csv')
+# table_name = 'minskworld_facebook_campaigns_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
 # inspector = sqlalchemy.inspect(engine)
 # if not inspector.has_table(table_name):
