@@ -194,6 +194,7 @@ df = df.rename(columns=lambda x: x.replace('.', '_'))
 df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d': 'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
 df.to_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv', index=False)
 
+
 df = pd.read_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv')
 # table_name = 'minskworld_facebook_ads_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
