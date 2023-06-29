@@ -10,13 +10,14 @@ import time
 start_time = time.time()
 with open('../resource/app_access_token.json', 'r') as file:
     app_access_token = json.load(file)
+with open('../resource/user_access_token.json', 'r') as file:
+    user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
 
 page_id_minskworld = pages_access_tokens['minskworld']['page_id']
 access_token_minskworld = pages_access_tokens['minskworld']['access_token']
 minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
-user_access_token = 'EAACZC4GqObNsBACBbOgCuQiiAX9Exd3YXK2Kj1devD9taW2zAv0XkhhHQZCjAIZCYNe8X5TArZB685q9ZAo8DroeiOGd2wHtAt04ME3pPXZCuvn4wLC82lYS2sZCxiX8CunWCZBi1Pss4M5K9lLa450jfnQQxOqTxw0ttL3ZBPh0TbcZC7xxQz5nFe'
 
 
 # ads_ids
