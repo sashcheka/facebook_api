@@ -43,20 +43,20 @@ url = f'https://graph.facebook.com/v17.0/{campaing_id}/insights'
 params = {
     'date_preset': 'this_month',
     'time_increment': 1,
-    'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
+    'fields': 'campaign_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
     'access_token': access_token_minskworld
 }
 
 response = requests.get(url, params=params).json()
-with open('facebook_ads_assets/minskworld_facebook_ad_insights.json', 'w') as file:
+with open('facebook_campaings_assets/minskworld_facebook_campaign_insights.json', 'w') as file:
     json.dump(response, file, indent=3)
 
-facebook_ad_insights_data = response['data']
+facebook_campaign_insights_data = response['data']
 
 data_list = []
-for entry in facebook_ad_insights_data:
+for entry in facebook_campaign_insights_data:
     entry_dict = {
-        "ad_name": entry["ad_name"],
+        "campaign_name": entry["campaign_name"],
         "reach": entry["reach"],
         "impressions": entry["impressions"],
         "spend": entry["spend"],
@@ -71,12 +71,15 @@ for entry in facebook_ad_insights_data:
         for action in entry["cost_per_action_type"]:
             entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
     except Exception as error:
-        print(error, ad_id)
+        print(error, campaing_id)
 
     try:
         data_list.append(entry_dict)
     except Exception as error:
-        print(error, ad_id)
+        print(error, campaing_id)
 
-df_ad_insights = pd.DataFrame(data_list)
-df_ad_insights.insert(0, 'ad_id', ad_id)
+df_campaign_insights = pd.DataFrame(data_list)
+df_campaign_insights.insert(0, 'ad_id', campaing_id)
+df = df_campaign_insights.rename(columns=lambda x: x.replace('.', '_'))
+df.to_csv('facebook_campaings_assets/minskworld_facebook_campaign_insights_df_campaign_insights.csv', index=False)
+print('done')
