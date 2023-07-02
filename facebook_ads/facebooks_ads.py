@@ -28,10 +28,32 @@ access_token = access_token_sportmasterbelarus
 business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
 
+# ads_sets_ids
+url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
+params = {
+    'fields': 'effective_status, optimization_goal',
+    'access_token': access_token
+}
+
+response = requests.get(url, params=params).json()
+
+try:
+    while True:
+        url_next = response['paging']['next']
+        response_next = requests.get(url_next).json()
+        response = response['data'] + response_next['data']
+except Exception as error:
+    print(error)
+response = {'data': response}
+with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'w') as file:
+    json.dump(response, file, indent=3)
+
+
 # ads_ids
 # https://developers.facebook.com/docs/marketing-api/reference/ad-account/ads/#overview
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/ads'
 params = {
+    'fields': 'effective_status, adset_id',
     'date_preset': 'last_month',
     'effective_status': '["ACTIVE"]',
     'access_token': access_token
@@ -50,12 +72,15 @@ except Exception as error:
 response = {'data': response}
 with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
-ads_ids = [i['id'] for i in response['data']]
-
-ad_sets = {}
 
 df = pd.DataFrame()
-for ad_id in ads_ids:
+
+for ad_data in response['data']:
+
+    ad_effective_status = ad_data['effective_status']
+    ad_adset_id = ad_data['adset_id']
+    ad_id = ad_data['id']
+
     # ad_insights
     # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
@@ -101,11 +126,27 @@ for ad_id in ads_ids:
     df_ad_insights = pd.DataFrame(data_list)
     df_ad_insights.insert(0, 'ad_id', ad_id)
 
+    df_ad_insights['effective_status'] = ad_effective_status
+
+    with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'r') as file:
+        facebook_ads_sets_ids_data = json.load(file)['data']
+
+    for ad_set_data in facebook_ads_sets_ids_data:
+        adset_id = ad_set_data['id']
+        adset_optimization_goal = ad_set_data['optimization_goal']
+        if ad_adset_id == adset_id:
+            df_ad_insights['optimization_goal'] = adset_optimization_goal
+            df_ad_insights['adset_id'] = adset_id
+
     # ad_creatives_id/ids
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/ad-creative/#overview
-    response = requests.get(f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives',
-                            params={'access_token': access_token}).json()
+    url = f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives'
+    params = {
+        'access_token': access_token
+    }
+    response = requests.get(url, params=params).json()
+
     with open('facebook_ads_assets/facebook_ad_creative_id_ids.json', 'w') as file:
         json.dump(response, file, indent=3)
     ad_creative_id = response['data'][0]['id']
@@ -121,45 +162,6 @@ for ad_id in ads_ids:
     with open('facebook_ads_assets/facebook_ad_creative.json', 'w') as file:
         json.dump(response, file, indent=3)
     df_ad_insights['ad_creative_thumbnail_url'] = response['thumbnail_url']
-
-    # ad_info
-    # https://developers.facebook.com/docs/marketing-api/reference/adgroup#overview
-    url = f'https://graph.facebook.com/v17.0/{ad_id}'
-    params = {
-        'fields': 'effective_status, adset_id',
-        'access_token': access_token
-    }
-
-    response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/facebook_ad_info.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    df_ad_insights['effective_status'] = response['effective_status']
-
-    # ad_set_insights
-    # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
-    # ad_set_id = response['adset_id']
-    #
-    # if ad_set_id not in ad_sets:
-    #     url = f'https://graph.facebook.com/v17.0/{ad_set_id}/insights'
-    #     params = {
-    #         'date_preset': 'last_month',
-    #         'time_increment': 1,
-    #         'fields': 'optimization_goal',
-    #         'access_token': access_token
-    #     }
-    #
-    #     response = requests.get(url, params=params).json()
-    #     with open('facebook_ads_assets/facebook_ad_set_insights.json', 'w') as file:
-    #         json.dump(response, file, indent=3)
-    #
-    #     try:
-    #         optimization_goal = response['data'][0]['optimization_goal']
-    #         ad_sets[ad_set_id] = optimization_goal
-    #         df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
-    #     except Exception as error:
-    #         print(error, ad_id)
-    #
-    # df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
 
     # ad_preview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
@@ -183,7 +185,6 @@ for ad_id in ads_ids:
     print(ad_id)
 
 
-# df.fillna('0', inplace=True)
 df = df.rename(columns=lambda x: x.replace('.', '_'))
 df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
                         'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
