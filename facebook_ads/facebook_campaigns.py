@@ -28,23 +28,38 @@ access_token = access_token_sportmasterbelarus
 business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
 
-# ad_account_campaigns
+# campaign_ids
 # https://developers.facebook.com/docs/marketing-api/reference/ad-account/campaigns/
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/campaigns'
 params = {
+    'fields': 'effective_status, adset_id',
     'date_preset': 'last_month',
-    'effective_status': '["ACTIVE", "PAUSED"]',
+    'effective_status': '["ACTIVE"]',
     'access_token': access_token
 }
 
 response = requests.get(url, params=params).json()
+
+try:
+    while True:
+        url_next = response['paging']['next']
+        response_next = requests.get(url_next).json()
+        response = response['data'] + response_next['data']
+except Exception as error:
+    print(error)
+
+response = {'data': response}
 with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
-campaings_ids = [i['id'] for i in response['data']]
 
 
 df = pd.DataFrame()
-for campaign_id in campaings_ids:
+
+for campaign in response['data']:
+
+    campaign_effective_status = campaign['effective_status']
+    campaign_id = campaign['id']
+
     # campaing_insights
     # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
@@ -73,15 +88,6 @@ for campaign_id in campaings_ids:
             except Exception as error:
                 print(error, campaign_id)
 
-        # entry_dict = {
-        #     "campaign_name": entry["campaign_name"],
-        #     "reach": entry["reach"],
-        #     "impressions": entry["impressions"],
-        #     "spend": entry["spend"],
-        #     "date_start": entry["date_start"],
-        #     "date_stop": entry["date_stop"],
-        # }
-
         try:
             for action in entry["actions"]:
                 entry_dict[f"actions_{action['action_type']}"] = action["value"]
@@ -99,18 +105,7 @@ for campaign_id in campaings_ids:
     df_campaign_insights = pd.DataFrame(data_list)
     df_campaign_insights.insert(0, 'campaign_id', campaign_id)
 
-    # campaign_info
-    # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group#overview
-    url = f'https://graph.facebook.com/v17.0/{campaign_id}'
-    params = {
-        'fields': 'effective_status',
-        'access_token': access_token
-    }
-
-    response = requests.get(url, params=params).json()
-    with open('facebook_campaings_assets/facebook_campaign_info.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    df_campaign_insights['effective_status'] = response['effective_status']
+    df_campaign_insights['effective_status'] = campaign_effective_status
 
     # campaign_ad_sets
     # https://developers.facebook.com/docs/marketing-api/reference/ad-account/adsets/#overview
