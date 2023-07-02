@@ -17,7 +17,15 @@ with open('../resource/pages_access_tokens.json', 'r') as file:
 
 page_id_minskworld = pages_access_tokens['minskworld']['page_id']
 access_token_minskworld = pages_access_tokens['minskworld']['access_token']
-minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
+business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
+
+page_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['page_id']
+access_token_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['access_token']
+business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['business_entity_managing_ads_id']
+
+page_id = page_id_sportmasterbelarus
+access_token = access_token_sportmasterbelarus
+business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
 
 # ads_ids
@@ -34,12 +42,12 @@ minskworld_business_entity_managing_ads_id = pages_access_tokens['minskworld']['
 #                     ADSET_PAUSED, \
 #                     IN_PROCESS, \
 #                     WITH_ISSUES"
-url = f'https://graph.facebook.com/v17.0/act_{minskworld_business_entity_managing_ads_id}/ads'
+url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/ads'
 params = {
-    'date_preset': 'this_month',
+    'date_preset': 'last_month',
     'limit': 25,
     'effective_status': '["ACTIVE"]',
-    'access_token': access_token_minskworld
+    'access_token': access_token
 }
 
 response = requests.get(url, params=params).json()
@@ -53,10 +61,11 @@ except Exception as error:
     print(error)
 
 response = {'data': response}
-with open('facebook_ads_assets/minskworld_facebook_ads_ids.json', 'w') as file:
+with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 ads_ids = [i['id'] for i in response['data']]
 
+ad_sets = {}
 
 df = pd.DataFrame()
 for ad_id in ads_ids:
@@ -66,28 +75,36 @@ for ad_id in ads_ids:
     # ad_id = 23855361563630270
     url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
     params = {
-        'date_preset': 'this_month',
+        'date_preset': 'last_month',
         'time_increment': 1,
         'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
-        'access_token': access_token_minskworld
+        'access_token': access_token
     }
 
     response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_insights.json', 'w') as file:
+    with open('facebook_ads_assets/facebook_ad_insights.json', 'w') as file:
         json.dump(response, file, indent=3)
 
     facebook_ad_insights_data = response['data']
 
     data_list = []
     for entry in facebook_ad_insights_data:
-        entry_dict = {
-            "ad_name": entry["ad_name"],
-            "reach": entry["reach"],
-            "impressions": entry["impressions"],
-            "spend": entry["spend"],
-            "date_start": entry["date_start"],
-            "date_stop": entry["date_stop"],
-        }
+        entry_dict = {}
+        entry_arr = ['ad_name', 'reach', 'impressions', 'spend', 'date_start', 'date_stop']
+        for entry_arr_elem in entry_arr:
+            try:
+                entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+            except Exception as error:
+                print(error, ad_id)
+
+        # entry_dict = {
+        #     "campaign_name": entry["campaign_name"],
+        #     "reach": entry["reach"],
+        #     "impressions": entry["impressions"],
+        #     "spend": entry["spend"],
+        #     "date_start": entry["date_start"],
+        #     "date_stop": entry["date_stop"],
+        # }
 
         try:
             for action in entry["actions"]:
@@ -110,8 +127,8 @@ for ad_id in ads_ids:
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/ad-creative/#overview
     response = requests.get(f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives',
-                            params={'access_token': access_token_minskworld}).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_creative_id_ids.json', 'w') as file:
+                            params={'access_token': access_token}).json()
+    with open('facebook_ads_assets/facebook_ad_creative_id_ids.json', 'w') as file:
         json.dump(response, file, indent=3)
     ad_creative_id = response['data'][0]['id']
 
@@ -119,11 +136,11 @@ for ad_id in ads_ids:
     url = f'https://graph.facebook.com/v17.0/{ad_creative_id}/'
     params = {
         'fields': 'thumbnail_url',
-        'access_token': access_token_minskworld
+        'access_token': access_token
     }
 
     response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_creative.json', 'w') as file:
+    with open('facebook_ads_assets/facebook_ad_creative.json', 'w') as file:
         json.dump(response, file, indent=3)
     df_ad_insights['ad_creative_thumbnail_url'] = response['thumbnail_url']
 
@@ -131,11 +148,11 @@ for ad_id in ads_ids:
     # url = f'https://graph.facebook.com/v17.0/{ad_creative_id}/previews'
     # params = {
     #     'ad_format': 'DESKTOP_FEED_STANDARD',
-    #     'access_token': access_token_minskworld
+    #     'access_token': access_token
     # }
     #
     # response = requests.get(url, params=params).json()
-    # with open('facebook_ads_assets/minskworld_facebook_ad_creative_preview.json', 'w') as file:
+    # with open('facebook_ads_assets/facebook_ad_creative_preview.json', 'w') as file:
     #     json.dump(response, file, indent=3)
 
     # ad_info
@@ -143,29 +160,59 @@ for ad_id in ads_ids:
     url = f'https://graph.facebook.com/v17.0/{ad_id}'
     params = {
         'fields': 'effective_status, adset_id',
-        'access_token': access_token_minskworld
+        'access_token': access_token
     }
 
     response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_info.json', 'w') as file:
+    with open('facebook_ads_assets/facebook_ad_info.json', 'w') as file:
         json.dump(response, file, indent=3)
     df_ad_insights['effective_status'] = response['effective_status']
 
     # ad_set_info
     # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
+    # ad_set_id = response['adset_id']
+    #
+    # if ad_set_id not in ad_sets:
+    #     url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
+    #     params = {
+    #         'date_preset': 'last_month',
+    #         'fields': 'optimization_goal',
+    #         'access_token': access_token
+    #     }
+    #
+    #     response = requests.get(url, params=params).json()
+    #     with open('facebook_ads_assets/facebook_ad_set_info.json', 'w') as file:
+    #         json.dump(response, file, indent=3)
+    #     ad_sets[ad_set_id] = response['optimization_goal']
+    #     df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
+    #
+    # df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
+
+    # ad_set_insights
+    # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
     ad_set_id = response['adset_id']
 
-    url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
-    params = {
-        'date_preset': 'this_month',
-        'fields': 'optimization_goal',
-        'access_token': access_token_minskworld
-    }
+    if ad_set_id not in ad_sets:
+        url = f'https://graph.facebook.com/v17.0/{ad_set_id}/insights'
+        params = {
+            'date_preset': 'last_month',
+            'time_increment': 1,
+            'fields': 'optimization_goal',
+            'access_token': access_token
+        }
 
-    response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_set_info.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    df_ad_insights['optimization_goal'] = response['optimization_goal']
+        response = requests.get(url, params=params).json()
+        with open('facebook_ads_assets/facebook_ad_set_insights.json', 'w') as file:
+            json.dump(response, file, indent=3)
+
+        try:
+            optimization_goal = response['data'][0]['optimization_goal']
+            ad_sets[ad_set_id] = optimization_goal
+            df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
+        except Exception as error:
+            print(error, ad_id)
+
+    df_ad_insights['optimization_goal'] = ad_sets[ad_set_id]
 
     # ad_preview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
@@ -176,7 +223,7 @@ for ad_id in ads_ids:
     }
 
     response = requests.get(url, params=params).json()
-    with open('facebook_ads_assets/minskworld_facebook_ad_preview.json', 'w') as file:
+    with open('facebook_ads_assets/facebook_ad_preview.json', 'w') as file:
         json.dump(response, file, indent=3)
     body = response['data'][0]['body']
     link_start = body.find('src="') + 5
@@ -187,15 +234,16 @@ for ad_id in ads_ids:
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
-    break
+
 
 # df.fillna('0', inplace=True)
 df = df.rename(columns=lambda x: x.replace('.', '_'))
-df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d': 'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
-df.to_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv', index=False)
+df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
+                        'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
+df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=False)
 
 
-df = pd.read_csv('facebook_ads_assets/minskworld_facebook_ad_insights_df_ad_insights.csv')
+# df = pd.read_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv')
 # table_name = 'minskworld_facebook_ads_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
 # inspector = sqlalchemy.inspect(engine)
