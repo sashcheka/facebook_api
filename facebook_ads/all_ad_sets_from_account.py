@@ -39,5 +39,5 @@ except Exception as error:
 
 response = {'data': response}
 
-with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'w') as file:
+with open('facebook_sets_assets/facebook_ads_sets_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
