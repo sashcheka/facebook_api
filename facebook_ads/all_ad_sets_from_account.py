@@ -28,5 +28,16 @@ params = {
 }
 
 response = requests.get(url, params=params).json()
+
+try:
+    while True:
+        url_next = response['paging']['next']
+        response_next = requests.get(url_next).json()
+        response = response['data'] + response_next['data']
+except Exception as error:
+    print(error)
+
+response = {'data': response}
+
 with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
