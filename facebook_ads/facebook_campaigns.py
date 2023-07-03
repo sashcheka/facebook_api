@@ -8,22 +8,18 @@ import time
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
 start_time = time.time()
-with open('../resource/app_access_token.json', 'r') as file:
-    app_access_token = json.load(file)
+
 with open('../resource/user_access_token.json', 'r') as file:
     user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
 
-page_id_minskworld = pages_access_tokens['minskworld']['page_id']
 access_token_minskworld = pages_access_tokens['minskworld']['access_token']
 business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
 
-page_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['page_id']
 access_token_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['access_token']
 business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['business_entity_managing_ads_id']
 
-page_id = page_id_sportmasterbelarus
 access_token = access_token_sportmasterbelarus
 business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
@@ -148,7 +144,7 @@ for campaign in response['data']:
     with open('facebook_campaings_assets/facebook_campaign_ad_sets.json', 'w') as file:
         json.dump(response, file, indent=3)
 
-    with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'r') as file:
+    with open('facebook_campaings_assets/facebook_ads_sets_ids.json', 'r') as file:
         facebook_ads_sets_ids_data = json.load(file)['data']
 
     try:
