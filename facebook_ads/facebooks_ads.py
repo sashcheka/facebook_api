@@ -27,6 +27,7 @@ page_id = page_id_sportmasterbelarus
 access_token = access_token_sportmasterbelarus
 business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
+r_count = 0
 
 # ads_sets_ids
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
@@ -36,11 +37,13 @@ params = {
 }
 
 response = requests.get(url, params=params).json()
+r_count += 1
 
 try:
     while True:
         url_next = response['paging']['next']
         response_next = requests.get(url_next).json()
+        r_count += 1
         response = response['data'] + response_next['data']
 except Exception as error:
     print(error)
@@ -60,11 +63,13 @@ params = {
 }
 
 response = requests.get(url, params=params).json()
+r_count += 1
 
 try:
     while True:
         url_next = response['paging']['next']
         response_next = requests.get(url_next).json()
+        r_count += 1
         response = response['data'] + response_next['data']
 except Exception as error:
     print(error)
@@ -94,6 +99,7 @@ for ad_data in response['data']:
     }
 
     response = requests.get(url, params=params).json()
+    r_count += 1
     with open('facebook_ads_assets/facebook_ad_insights.json', 'w') as file:
         json.dump(response, file, indent=3)
 
@@ -146,6 +152,7 @@ for ad_data in response['data']:
         'access_token': access_token
     }
     response = requests.get(url, params=params).json()
+    r_count += 1
 
     with open('facebook_ads_assets/facebook_ad_creative_id_ids.json', 'w') as file:
         json.dump(response, file, indent=3)
@@ -159,6 +166,7 @@ for ad_data in response['data']:
     }
 
     response = requests.get(url, params=params).json()
+    r_count += 1
     with open('facebook_ads_assets/facebook_ad_creative.json', 'w') as file:
         json.dump(response, file, indent=3)
     df_ad_insights['ad_creative_thumbnail_url'] = response['thumbnail_url']
@@ -172,6 +180,7 @@ for ad_data in response['data']:
     }
 
     response = requests.get(url, params=params).json()
+    r_count += 1
     with open('facebook_ads_assets/facebook_ad_preview.json', 'w') as file:
         json.dump(response, file, indent=3)
     body = response['data'][0]['body']
@@ -203,4 +212,4 @@ df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=F
 
 end_time = time.time()
 execution_time = end_time - start_time
-print(f'Execution time: {execution_time} seconds')
+print(f'Execution time: {execution_time} seconds with {r_count} requests')

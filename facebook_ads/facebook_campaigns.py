@@ -27,6 +27,30 @@ page_id = page_id_sportmasterbelarus
 access_token = access_token_sportmasterbelarus
 business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
 
+r_count = 0
+
+# ads_sets_ids
+url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
+params = {
+    'fields': 'effective_status, optimization_goal',
+    'access_token': access_token
+}
+
+response = requests.get(url, params=params).json()
+r_count += 1
+
+try:
+    while True:
+        url_next = response['paging']['next']
+        response_next = requests.get(url_next).json()
+        r_count += 1
+        response = response['data'] + response_next['data']
+except Exception as error:
+    print(error)
+response = {'data': response}
+with open('facebook_campaings_assets/facebook_ads_sets_ids.json', 'w') as file:
+    json.dump(response, file, indent=3)
+
 
 # campaign_ids
 # https://developers.facebook.com/docs/marketing-api/reference/ad-account/campaigns/
@@ -39,11 +63,13 @@ params = {
 }
 
 response = requests.get(url, params=params).json()
+r_count += 1
 
 try:
     while True:
         url_next = response['paging']['next']
         response_next = requests.get(url_next).json()
+        r_count += 1
         response = response['data'] + response_next['data']
 except Exception as error:
     print(error)
@@ -73,6 +99,7 @@ for campaign in response['data']:
     }
 
     response = requests.get(url, params=params).json()
+    r_count += 1
     with open('facebook_campaings_assets/facebook_campaign_insights.json', 'w') as file:
         json.dump(response, file, indent=3)
 
@@ -112,29 +139,26 @@ for campaign in response['data']:
     url = f'https://graph.facebook.com/v17.0/{campaign_id}/adsets'
     params = {
         'date_preset': 'last_month',
-        'effective_status': '["ACTIVE", "PAUSED"]',
+        'effective_status': '["ACTIVE"]',
         'access_token': access_token
     }
 
     response = requests.get(url, params=params).json()
+    r_count += 1
     with open('facebook_campaings_assets/facebook_campaign_ad_sets.json', 'w') as file:
         json.dump(response, file, indent=3)
 
-    # campaign_ad_set_info
-    # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign#overview
+    with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'r') as file:
+        facebook_ads_sets_ids_data = json.load(file)['data']
+
     try:
         ad_set_id = response['data'][0]['id']
-        url = f'https://graph.facebook.com/v17.0/{ad_set_id}'
-        params = {
-            'date_preset': 'last_month',
-            'fields': 'optimization_goal',
-            'access_token': access_token
-        }
-
-        response = requests.get(url, params=params).json()
-        with open('facebook_campaings_assets/facebook_campaign_set_info.json', 'w') as file:
-            json.dump(response, file, indent=3)
-        df_campaign_insights['optimization_goal'] = response['optimization_goal']
+        for ad_set_data in facebook_ads_sets_ids_data:
+            adset_id = ad_set_data['id']
+            adset_optimization_goal = ad_set_data['optimization_goal']
+            if ad_set_id == adset_id:
+                df_campaign_insights['optimization_goal'] = adset_optimization_goal
+                df_campaign_insights['adset_id'] = adset_id
     except Exception as error:
         print(error, campaign_id)
 
@@ -148,7 +172,7 @@ df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conver
 df.to_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insights.csv', index=False)
 
 
-df = pd.read_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insights.csv')
+# df = pd.read_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insights.csv')
 # table_name = 'minskworld_facebook_campaigns_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
 # inspector = sqlalchemy.inspect(engine)
@@ -160,4 +184,4 @@ df = pd.read_csv('facebook_campaings_assets/facebook_campaign_insights_df_campai
 
 end_time = time.time()
 execution_time = end_time - start_time
-print(f'Execution time: {execution_time} seconds')
+print(f'Execution time: {execution_time} seconds with {r_count} requests')
