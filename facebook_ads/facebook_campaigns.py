@@ -26,26 +26,8 @@ business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbel
 r_count = 0
 
 # ads_sets_ids
-url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
-params = {
-    'fields': 'effective_status, optimization_goal',
-    'access_token': access_token
-}
-
-response = requests.get(url, params=params).json()
-r_count += 1
-
-try:
-    while True:
-        url_next = response['paging']['next']
-        response_next = requests.get(url_next).json()
-        r_count += 1
-        response = response['data'] + response_next['data']
-except Exception as error:
-    print(error)
-response = {'data': response}
-with open('facebook_campaings_assets/facebook_ads_sets_ids.json', 'w') as file:
-    json.dump(response, file, indent=3)
+with open('facebook_adsets_ids.json', 'r') as file:
+    facebook_adsets_ids = json.load(file)['data']
 
 
 # campaign_ids
@@ -101,10 +83,6 @@ for campaign in response['data']:
 
     facebook_campaign_insights_data = response['data']
 
-    if not facebook_campaign_insights_data:
-        print('continue')
-        continue
-
     data_list = []
     for entry in facebook_campaign_insights_data:
         entry_dict = {}
@@ -145,15 +123,13 @@ for campaign in response['data']:
 
     response = requests.get(url, params=params).json()
     r_count += 1
+
     with open('facebook_campaings_assets/facebook_campaign_ad_sets.json', 'w') as file:
         json.dump(response, file, indent=3)
 
-    with open('facebook_campaings_assets/facebook_ads_sets_ids.json', 'r') as file:
-        facebook_ads_sets_ids_data = json.load(file)['data']
-
     try:
         ad_set_id = response['data'][0]['id']
-        for ad_set_data in facebook_ads_sets_ids_data:
+        for ad_set_data in facebook_adsets_ids:
             adset_id = ad_set_data['id']
             adset_optimization_goal = ad_set_data['optimization_goal']
             if ad_set_id == adset_id:
@@ -164,6 +140,7 @@ for campaign in response['data']:
 
     df = pd.concat([df, df_campaign_insights], ignore_index=True)
     print(campaign_id)
+    break
 
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))

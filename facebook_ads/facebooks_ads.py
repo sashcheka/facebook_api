@@ -43,9 +43,11 @@ try:
         response = response['data'] + response_next['data']
 except Exception as error:
     print(error)
+
 response = {'data': response}
-with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'w') as file:
+with open('facebook_adsets_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
+facebook_adsets_ids = response['data']
 
 
 # ads_ids
@@ -74,8 +76,8 @@ response = {'data': response}
 with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 
-df = pd.DataFrame()
 
+df = pd.DataFrame()
 
 for ad_data in response['data']:
 
@@ -135,10 +137,7 @@ for ad_data in response['data']:
 
     df_ad_insights['effective_status'] = ad_effective_status
 
-    with open('facebook_ads_assets/facebook_ads_sets_ids.json', 'r') as file:
-        facebook_ads_sets_ids_data = json.load(file)['data']
-
-    for ad_set_data in facebook_ads_sets_ids_data:
+    for ad_set_data in facebook_adsets_ids:
         adset_id = ad_set_data['id']
         adset_optimization_goal = ad_set_data['optimization_goal']
         if ad_adset_id == adset_id:
@@ -193,6 +192,7 @@ for ad_data in response['data']:
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
+    break
 
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))
