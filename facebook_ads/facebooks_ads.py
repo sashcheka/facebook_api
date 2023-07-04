@@ -76,6 +76,7 @@ with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
 
 df = pd.DataFrame()
 
+
 for ad_data in response['data']:
 
     ad_effective_status = ad_data['effective_status']
@@ -85,7 +86,7 @@ for ad_data in response['data']:
     # ad_insights
     # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
-    # ad_id = 23855361563630270
+    # ad_id = '23853729303580500'
     url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
     params = {
         'date_preset': 'last_month',
@@ -100,6 +101,10 @@ for ad_data in response['data']:
         json.dump(response, file, indent=3)
 
     facebook_ad_insights_data = response['data']
+
+    if not facebook_ad_insights_data:
+        print('continue')
+        continue
 
     data_list = []
     for entry in facebook_ad_insights_data:

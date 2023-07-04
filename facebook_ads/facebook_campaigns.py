@@ -101,6 +101,10 @@ for campaign in response['data']:
 
     facebook_campaign_insights_data = response['data']
 
+    if not facebook_campaign_insights_data:
+        print('continue')
+        continue
+
     data_list = []
     for entry in facebook_campaign_insights_data:
         entry_dict = {}
