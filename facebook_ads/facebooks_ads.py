@@ -1,9 +1,12 @@
 import pandas as pd
 import sqlalchemy
 import requests
+import logging
 import json
 import time
 
+
+logging.basicConfig(filename='facebook_ads_assets/ads_logs.log', level=logging.DEBUG)
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
@@ -42,6 +45,7 @@ try:
         r_count += 1
         response = response['data'] + response_next['data']
 except Exception as error:
+    logging.exception("An exception occurred: ")
     print(error)
 
 response = {'data': response}
@@ -70,6 +74,7 @@ try:
         r_count += 1
         response = response['data'] + response_next['data']
 except Exception as error:
+    logging.exception("An exception occurred: ")
     print(error)
 
 response = {'data': response}
@@ -116,6 +121,7 @@ for ad_data in response['data']:
             try:
                 entry_dict[entry_arr_elem] = entry[entry_arr_elem]
             except Exception as error:
+                logging.exception("An exception occurred: ")
                 print(error, ad_id)
 
         try:
@@ -125,11 +131,13 @@ for ad_data in response['data']:
             for action in entry["cost_per_action_type"]:
                 entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
         except Exception as error:
+            logging.exception("An exception occurred: ")
             print(error, ad_id)
 
         try:
             data_list.append(entry_dict)
         except Exception as error:
+            logging.exception("An exception occurred: ")
             print(error, ad_id)
 
     df_ad_insights = pd.DataFrame(data_list)
@@ -192,7 +200,6 @@ for ad_data in response['data']:
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
     print(ad_id)
-    break
 
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))
