@@ -6,7 +6,7 @@ import json
 import time
 
 
-logging.basicConfig(filename='facebook_campaings_assets/campaign_logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='facebook_campaings_assets/campaign_logs.log', level=logging.INFO)
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
@@ -23,8 +23,12 @@ business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['
 access_token_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['access_token']
 business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['business_entity_managing_ads_id']
 
-access_token = access_token_sportmasterbelarus
-business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
+access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
+business_entity_managing_ads_id_zovofficial = pages_access_tokens['zovofficial']['business_entity_managing_ads_id']
+
+page_name = 'zovofficial'
+access_token = access_token_zovofficial
+business_entity_managing_ads_id = business_entity_managing_ads_id_zovofficial
 
 r_count = 0
 
@@ -56,7 +60,7 @@ except Exception as error:
     logging.exception("An exception occurred: ")
     print(error)
 
-response = {'data': response}
+# response = {'data': response}
 with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 
@@ -147,7 +151,7 @@ for campaign in response['data']:
         print(error, campaign_id)
 
     df = pd.concat([df, df_campaign_insights], ignore_index=True)
-    print(campaign_id)
+    print(f'Campaign {campaign_id} done')
     break
 
 
@@ -158,7 +162,7 @@ df.to_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insi
 
 
 # df = pd.read_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insights.csv')
-# table_name = 'minskworld_facebook_campaigns_insights'
+# table_name = f'{page_name}_facebook_campaigns_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
 # inspector = sqlalchemy.inspect(engine)
 # if not inspector.has_table(table_name):

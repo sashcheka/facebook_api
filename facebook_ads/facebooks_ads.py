@@ -6,7 +6,7 @@ import json
 import time
 
 
-logging.basicConfig(filename='facebook_ads_assets/ads_logs.log', level=logging.DEBUG)
+logging.basicConfig(filename='facebook_ads_assets/ads_logs.log', level=logging.INFO)
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
@@ -23,8 +23,12 @@ business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['
 access_token_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['access_token']
 business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['business_entity_managing_ads_id']
 
-access_token = access_token_sportmasterbelarus
-business_entity_managing_ads_id = business_entity_managing_ads_id_sportmasterbelarus
+access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
+business_entity_managing_ads_id_zovofficial = pages_access_tokens['zovofficial']['business_entity_managing_ads_id']
+
+page_name = 'zovofficial'
+access_token = access_token_zovofficial
+business_entity_managing_ads_id = business_entity_managing_ads_id_zovofficial
 
 r_count = 0
 
@@ -32,6 +36,7 @@ r_count = 0
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
 params = {
     'fields': 'effective_status, optimization_goal',
+    'effective_status': '["ACTIVE"]',
     'access_token': access_token
 }
 
@@ -48,7 +53,7 @@ except Exception as error:
     logging.exception("An exception occurred: ")
     print(error)
 
-response = {'data': response}
+# response = {'data': response}
 with open('facebook_adsets_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 facebook_adsets_ids = response['data']
@@ -77,7 +82,7 @@ except Exception as error:
     logging.exception("An exception occurred: ")
     print(error)
 
-response = {'data': response}
+# response = {'data': response}
 with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
 
@@ -199,7 +204,8 @@ for ad_data in response['data']:
     df_ad_insights['ad_preview_link'] = ad_preview_link
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
-    print(ad_id)
+    print(f'Ad {ad_id} done')
+    break
 
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))
@@ -209,7 +215,7 @@ df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=F
 
 
 # df = pd.read_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv')
-# table_name = 'minskworld_facebook_ads_insights'
+# table_name = f'{page_name}_facebook_ads_insights'
 # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
 # inspector = sqlalchemy.inspect(engine)
 # if not inspector.has_table(table_name):
