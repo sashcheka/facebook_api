@@ -26,9 +26,9 @@ business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportm
 access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
 business_entity_managing_ads_id_zovofficial = pages_access_tokens['zovofficial']['business_entity_managing_ads_id']
 
-page_name = 'zovofficial'
-access_token = access_token_zovofficial
-business_entity_managing_ads_id = business_entity_managing_ads_id_zovofficial
+page_name = 'minskworld'
+access_token = access_token_minskworld
+business_entity_managing_ads_id = business_entity_managing_ads_id_minskworld
 
 r_count = 0
 
@@ -36,7 +36,7 @@ r_count = 0
 url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
 params = {
     'fields': 'effective_status, optimization_goal',
-    'effective_status': '["ACTIVE"]',
+    'effective_status': '["ACTIVE", "PAUSED"]',
     'access_token': access_token
 }
 
@@ -56,7 +56,7 @@ except Exception as error:
 # response = {'data': response}
 with open('facebook_adsets_ids.json', 'w') as file:
     json.dump(response, file, indent=3)
-facebook_adsets_ids = response['data']
+facebook_adsets_ids = response
 
 
 # ads_ids

@@ -1,0 +1,1182 @@
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'next'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'next'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'next'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 142, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 112, in <module>
+    entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                                                     ~~~~~~^^^^^^^^^
+KeyError: 'value'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 146, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\test_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\test_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 111, in <module>
+    for action in entry["actions"]:
+                  ~~~~~^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 105, in <module>
+    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
+                                 ~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'campaign_name'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 148, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'data'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 148, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 148, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\summary.py", line 148, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 164, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns.py", line 147, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 171, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 171, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 171, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 112, in <module>
+    entry_dict[f'summory_{entry_arr_elem}'] = facebook_campaign_insights_summary[entry_arr_elem]
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'campaign_name'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 112, in <module>
+    entry_dict[f'summory_{entry_arr_elem}'] = facebook_campaign_insights_summary[entry_arr_elem]
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'campaign_name'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 112, in <module>
+    entry_dict[f'summory_{entry_arr_elem}'] = facebook_campaign_insights_summary[entry_arr_elem]
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'campaign_name'
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 55, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 156, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 156, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 156, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 56, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 56, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 56, in <module>
+    url_next = response['paging']['next']
+               ~~~~~~~~^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+ERROR:root:An exception occurred: 
+Traceback (most recent call last):
+  File "D:\Desktop\ \Coding\facebook_api\facebook_ads\facebook_campaigns_summary.py", line 157, in <module>
+    ad_set_id = response['data'][0]['id']
+                ~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range

@@ -26,15 +26,15 @@ business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportm
 access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
 business_entity_managing_ads_id_zovofficial = pages_access_tokens['zovofficial']['business_entity_managing_ads_id']
 
-page_name = 'zovofficial'
-access_token = access_token_zovofficial
-business_entity_managing_ads_id = business_entity_managing_ads_id_zovofficial
+page_name = 'minskworld'
+access_token = access_token_minskworld
+business_entity_managing_ads_id = business_entity_managing_ads_id_minskworld
 
 r_count = 0
 
 # ads_sets_ids
 with open('facebook_adsets_ids.json', 'r') as file:
-    facebook_adsets_ids = json.load(file)['data']
+    facebook_adsets_ids = json.load(file)
 
 
 # campaign_ids
@@ -43,7 +43,7 @@ url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/c
 params = {
     'fields': 'effective_status, adset_id',
     'date_preset': 'last_month',
-    'effective_status': '["ACTIVE"]',
+    'effective_status': '["ACTIVE", "PAUSED"]',
     'access_token': access_token
 }
 
@@ -58,7 +58,7 @@ try:
         response = response['data'] + response_next['data']
 except Exception as error:
     logging.exception("An exception occurred: ")
-    print(error)
+    print(error, 'line 61')
 
 # response = {'data': response}
 with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
@@ -67,10 +67,10 @@ with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
 
 df = pd.DataFrame()
 
-for campaign in response['data']:
+for campaign in response:
 
     campaign_effective_status = campaign['effective_status']
-    campaign_id = campaign['id']
+    campaign_id = 23855176905730270
 
     # campaing_insights
     # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
@@ -78,6 +78,7 @@ for campaign in response['data']:
     # campaign_id = 23855176115050270
     url = f'https://graph.facebook.com/v17.0/{campaign_id}/insights'
     params = {
+        'default_summary': True,
         'date_preset': 'last_month',
         'time_increment': 1,
         'fields': 'campaign_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
@@ -91,6 +92,10 @@ for campaign in response['data']:
 
     facebook_campaign_insights_data = response['data']
 
+    if not facebook_campaign_insights_data:
+        print('continue')
+        continue
+
     data_list = []
     for entry in facebook_campaign_insights_data:
         entry_dict = {}
@@ -100,7 +105,7 @@ for campaign in response['data']:
                 entry_dict[entry_arr_elem] = entry[entry_arr_elem]
             except Exception as error:
                 logging.exception("An exception occurred: ")
-                print(error, campaign_id)
+                print(error, campaign_id, 'line 107')
 
         try:
             for action in entry["actions"]:
@@ -110,13 +115,13 @@ for campaign in response['data']:
                 entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
         except Exception as error:
             logging.exception("An exception occurred: ")
-            print(error, campaign_id)
+            print(error, campaign_id, 'line 117')
 
         try:
             data_list.append(entry_dict)
         except Exception as error:
             logging.exception("An exception occurred: ")
-            print(error, campaign_id)
+            print(error, campaign_id, 'line 123')
 
     df_campaign_insights = pd.DataFrame(data_list)
     df_campaign_insights.insert(0, 'campaign_id', campaign_id)
@@ -148,7 +153,7 @@ for campaign in response['data']:
                 df_campaign_insights['adset_id'] = adset_id
     except Exception as error:
         logging.exception("An exception occurred: ")
-        print(error, campaign_id)
+        print(error, campaign_id, 'line 155')
 
     df = pd.concat([df, df_campaign_insights], ignore_index=True)
     print(f'Campaign {campaign_id} done')
