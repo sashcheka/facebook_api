@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import sqlalchemy
 import requests
 import logging
@@ -89,7 +90,7 @@ with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
 
 df = pd.DataFrame()
 
-for ad_data in response['data']:
+for ad_data in response:
 
     ad_effective_status = ad_data['effective_status']
     ad_adset_id = ad_data['adset_id']
@@ -101,6 +102,7 @@ for ad_data in response['data']:
     # ad_id = '23853729303580500'
     url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
     params = {
+        'default_summary': True,
         'date_preset': 'last_month',
         'time_increment': 1,
         'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
@@ -113,21 +115,30 @@ for ad_data in response['data']:
         json.dump(response, file, indent=3)
 
     facebook_ad_insights_data = response['data']
+    facebook_ad_insights_summary = response['summary']
 
     if not facebook_ad_insights_data:
-        print('continue')
+        print(f'continue {ad_id}')
         continue
 
     data_list = []
     for entry in facebook_ad_insights_data:
         entry_dict = {}
         entry_arr = ['ad_name', 'reach', 'impressions', 'spend', 'date_start', 'date_stop']
+
         for entry_arr_elem in entry_arr:
             try:
                 entry_dict[entry_arr_elem] = entry[entry_arr_elem]
             except Exception as error:
                 logging.exception("An exception occurred: ")
                 print(error, ad_id)
+
+            if entry_arr_elem in ['reach', 'impressions', 'spend']:
+                try:
+                    entry_dict[f'summary_{entry_arr_elem}'] = facebook_ad_insights_summary[entry_arr_elem]
+                except Exception as error:
+                    logging.exception("An exception occurred: ")
+                    print(error, ad_id, 'line 140')
 
         try:
             for action in entry["actions"]:
@@ -204,8 +215,13 @@ for ad_data in response['data']:
     df_ad_insights['ad_preview_link'] = ad_preview_link
 
     df = pd.concat([df, df_ad_insights], ignore_index=True)
+    df.loc[df.duplicated(subset='summary_reach', keep='first'), 'summary_reach'] = np.nan
+    df.loc[df.duplicated(subset='summary_impressions', keep='first'), 'summary_impressions'] = np.nan
+    df.loc[df.duplicated(subset='summary_spend', keep='first'), 'summary_spend'] = np.nan
+    df['summary_reach'] = df['summary_reach'].fillna(0)
+    df['summary_impressions'] = df['summary_impressions'].fillna(0)
+    df['summary_spend'] = df['summary_spend'].fillna(0)
     print(f'Ad {ad_id} done')
-    break
 
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))

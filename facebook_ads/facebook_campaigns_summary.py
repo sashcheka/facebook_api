@@ -1,10 +1,10 @@
 import pandas as pd
+import numpy as np
 import sqlalchemy
 import requests
 import logging
 import json
 import time
-import numpy as np
 
 
 logging.basicConfig(filename='facebook_campaings_assets/campaign_logs.log', level=logging.INFO)
@@ -94,10 +94,10 @@ for campaign in response:
     facebook_campaign_insights_data = response['data']
     facebook_campaign_insights_summary = response['summary']
     
-    if not response['data']:
+    if not facebook_campaign_insights_data:
         print('continue')
         continue
-        
+
     data_list = []
     for entry in facebook_campaign_insights_data:
         entry_dict = {}
@@ -108,14 +108,14 @@ for campaign in response:
                 entry_dict[entry_arr_elem] = entry[entry_arr_elem]
             except Exception as error:
                 logging.exception("An exception occurred: ")
-                print(error, campaign_id, 'line 107')
+                print(error, campaign_id, 'line 111')
 
             if entry_arr_elem in ['reach', 'impressions', 'spend']:
                 try:
                     entry_dict[f'summary_{entry_arr_elem}'] = facebook_campaign_insights_summary[entry_arr_elem]
                 except Exception as error:
                     logging.exception("An exception occurred: ")
-                    print(error, campaign_id, 'line 107')
+                    print(error, campaign_id, 'line 118')
 
         try:
             for action in entry["actions"]:
