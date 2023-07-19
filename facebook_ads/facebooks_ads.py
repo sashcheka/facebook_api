@@ -40,6 +40,8 @@ with open('../resource/user_access_token.json', 'r') as file:
     user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
+with open('../resource/pages_access_tokens_2.json', 'r') as file:
+    pages_access_tokens_2 = json.load(file)
 
 effective_statuses = '["ACTIVE", \
                        "PAUSED", \
@@ -66,7 +68,7 @@ r_count = 0
 campaign_ads = []
 
 
-for page in pages_access_tokens:
+for page in pages_access_tokens_2:
     account_name = page['account_name']
     business_entity_managing_ads_id = page['business_entity_managing_ads_id']
     access_token = page['access_token']
