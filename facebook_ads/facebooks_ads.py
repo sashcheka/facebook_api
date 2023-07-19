@@ -1,13 +1,27 @@
+from progressBar import progressbar
 import pandas as pd
 import numpy as np
 import sqlalchemy
+import traceback
+import datetime
 import requests
 import logging
 import json
 import time
+import sys
 
 
-logging.basicConfig(filename='facebook_ads_assets/ads_logs.log', level=logging.INFO)
+start_time = time.time()
+
+
+time_range_until = datetime.date.today()
+time_range_since = datetime.date(time_range_until.year, time_range_until.month - 2, 1)
+
+
+logging.basicConfig(filename='facebook_ads_assets/ads_logs.log',
+                    level=logging.INFO,
+                    format='%(asctime)s %(message)s',
+                    datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
@@ -21,76 +35,66 @@ with open('../resource/pages_access_tokens.json', 'r') as file:
 access_token_minskworld = pages_access_tokens['minskworld']['access_token']
 business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
 
-access_token_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['access_token']
-business_entity_managing_ads_id_sportmasterbelarus = pages_access_tokens['sportmasterbelarus']['business_entity_managing_ads_id']
+access_token_green = pages_access_tokens['green']['access_token']
+business_entity_managing_ads_id_green = pages_access_tokens['green']['business_entity_managing_ads_id']
 
-access_token_zovofficial = pages_access_tokens['zovofficial']['access_token']
-business_entity_managing_ads_id_zovofficial = pages_access_tokens['zovofficial']['business_entity_managing_ads_id']
-
-page_name = 'minskworld'
-access_token = access_token_minskworld
-business_entity_managing_ads_id = business_entity_managing_ads_id_minskworld
+page_name = 'green'
+access_token = access_token_green
+business_entity_managing_ads_id = business_entity_managing_ads_id_green
 
 r_count = 0
 
 # ads_sets_ids
-url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/adsets'
-params = {
-    'fields': 'effective_status, optimization_goal',
-    'effective_status': '["ACTIVE", "PAUSED"]',
-    'access_token': access_token
-}
-
-response = requests.get(url, params=params).json()
-r_count += 1
-
-try:
-    while True:
-        url_next = response['paging']['next']
-        response_next = requests.get(url_next).json()
-        r_count += 1
-        response = response['data'] + response_next['data']
-except Exception as error:
-    logging.exception("An exception occurred: ")
-    print(error)
-
-# response = {'data': response}
-with open('facebook_adsets_ids.json', 'w') as file:
-    json.dump(response, file, indent=3)
-facebook_adsets_ids = response
+with open('facebook_adsets_ids.json', 'r') as file:
+    facebook_adsets_ids = json.load(file)
 
 
-# ads_ids
-# https://developers.facebook.com/docs/marketing-api/reference/ad-account/ads/#overview
-url = f'https://graph.facebook.com/v17.0/act_{business_entity_managing_ads_id}/ads'
-params = {
-    'fields': 'effective_status, adset_id',
-    'date_preset': 'last_month',
-    'effective_status': '["ACTIVE"]',
-    'access_token': access_token
-}
+with open('actual_campaigns.json', 'r') as file:
+    actual_campaigns = json.load(file)
 
-response = requests.get(url, params=params).json()
-r_count += 1
+campaign_ads = []
+i = 0
 
-try:
-    while True:
-        url_next = response['paging']['next']
-        response_next = requests.get(url_next).json()
-        r_count += 1
-        response = response['data'] + response_next['data']
-except Exception as error:
-    logging.exception("An exception occurred: ")
-    print(error)
+for campaign_data in actual_campaigns:
 
-# response = {'data': response}
+    i += 1
+    effective_status = campaign_data['effective_status']
+    campaign_id = campaign_data['id']
+
+    url = f'https://graph.facebook.com/v17.0/{campaign_id}/ads'
+
+    params = {
+        'time_range[since]': time_range_since,
+        'time_range[until]': time_range_until,
+        'fields': 'effective_status, adset_id, account_id',
+        'access_token': access_token
+    }
+
+    response = requests.get(url, params=params).json()
+
+    try:
+        while True:
+            url_next = response['paging']['next']
+            response_next = requests.get(url_next).json()
+            response = response['data'] + response_next['data']
+    except Exception as error:
+        print(error)
+
+    try:
+        response = response['data']
+    except Exception as error:
+        print(error)
+
+    campaign_ads = campaign_ads + response
+
+
 with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
-    json.dump(response, file, indent=3)
+    json.dump(campaign_ads, file, indent=3)
 
 
 df = pd.DataFrame()
 
-for ad_data in response:
+for ad_data in progressbar(campaign_ads):
 
     ad_effective_status = ad_data['effective_status']
     ad_adset_id = ad_data['adset_id']
@@ -99,11 +103,11 @@ for ad_data in response:
     # ad_insights
     # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
     # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
-    # ad_id = '23853729303580500'
     url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
     params = {
         'default_summary': True,
-        'date_preset': 'last_month',
+        'time_range[since]': time_range_since,
+        'time_range[until]': time_range_until,
         'time_increment': 1,
         'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
         'access_token': access_token
@@ -226,7 +230,7 @@ for ad_data in response:
 
 df = df.rename(columns=lambda x: x.replace('.', '_'))
 df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
-                        'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
+                            'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
 df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=False)
 
 
