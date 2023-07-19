@@ -23,26 +23,36 @@ logging.basicConfig(filename='facebook_ads_assets/ads_logs.log',
                     format='%(asctime)s %(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p')
 
+
+# functions
+def log_exception(exception_error):
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    traceback_details = traceback.extract_tb(exc_traceback)
+    _, lineno, _, _ = traceback_details[-1]
+    logging.exception(f"An exception occurred: '{exception_error}' at line {lineno}")
+    print(f"An exception occurred: '{exception_error}' at line {lineno}")
+
+
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
-start_time = time.time()
 
 with open('../resource/user_access_token.json', 'r') as file:
     user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
 
-access_token_minskworld = pages_access_tokens['minskworld']['access_token']
-business_entity_managing_ads_id_minskworld = pages_access_tokens['minskworld']['business_entity_managing_ads_id']
+effective_statuses = '["ACTIVE", \
+                       "PAUSED", \
+                       "PENDING_REVIEW", \
+                       "DISAPPROVED", \
+                       "PREAPPROVED", \
+                       "PENDING_BILLING_INFO", \
+                       "CAMPAIGN_PAUSED", \
+                       "ARCHIVED", \
+                       "ADSET_PAUSED", \
+                       "IN_PROCESS", \
+                       "WITH_ISSUES"]'
 
-access_token_green = pages_access_tokens['green']['access_token']
-business_entity_managing_ads_id_green = pages_access_tokens['green']['business_entity_managing_ads_id']
-
-page_name = 'green'
-access_token = access_token_green
-business_entity_managing_ads_id = business_entity_managing_ads_id_green
-
-r_count = 0
 
 # ads_sets_ids
 with open('facebook_adsets_ids.json', 'r') as file:
@@ -52,196 +62,197 @@ with open('facebook_adsets_ids.json', 'r') as file:
 with open('actual_campaigns.json', 'r') as file:
     actual_campaigns = json.load(file)
 
+r_count = 0
 campaign_ads = []
-i = 0
-
-for campaign_data in actual_campaigns:
-
-    i += 1
-    effective_status = campaign_data['effective_status']
-    campaign_id = campaign_data['id']
-
-    url = f'https://graph.facebook.com/v17.0/{campaign_id}/ads'
-
-    params = {
-        'time_range[since]': time_range_since,
-        'time_range[until]': time_range_until,
-        'fields': 'effective_status, adset_id, account_id',
-        'access_token': access_token
-    }
-
-    response = requests.get(url, params=params).json()
-
-    try:
-        while True:
-            url_next = response['paging']['next']
-            response_next = requests.get(url_next).json()
-            response = response['data'] + response_next['data']
-    except Exception as error:
-        print(error)
-
-    try:
-        response = response['data']
-    except Exception as error:
-        print(error)
-
-    campaign_ads = campaign_ads + response
 
 
-with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
-    json.dump(campaign_ads, file, indent=3)
+for page in pages_access_tokens:
+    account_name = page['account_name']
+    business_entity_managing_ads_id = page['business_entity_managing_ads_id']
+    access_token = page['access_token']
 
+    for campaign_data in actual_campaigns:
 
-df = pd.DataFrame()
+        effective_status = campaign_data['effective_status']
+        campaign_id = campaign_data['id']
 
-for ad_data in progressbar(campaign_ads):
+        url = f'https://graph.facebook.com/v17.0/{campaign_id}/ads'
 
-    ad_effective_status = ad_data['effective_status']
-    ad_adset_id = ad_data['adset_id']
-    ad_id = ad_data['id']
+        params = {
+            'time_range[since]': time_range_since,
+            'time_range[until]': time_range_until,
+            'fields': 'effective_status, adset_id, account_id',
+            'access_token': access_token
+        }
 
-    # ad_insights
-    # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
-    # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
-    url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
-    params = {
-        'default_summary': True,
-        'time_range[since]': time_range_since,
-        'time_range[until]': time_range_until,
-        'time_increment': 1,
-        'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
-        'access_token': access_token
-    }
+        response = requests.get(url, params=params).json()
 
-    response = requests.get(url, params=params).json()
-    r_count += 1
-    with open('facebook_ads_assets/facebook_ad_insights.json', 'w') as file:
-        json.dump(response, file, indent=3)
+        try:
+            while True:
+                url_next = response['paging']['next']
+                response_next = requests.get(url_next).json()
+                response = response['data'] + response_next['data']
+        except Exception as error:
+            log_exception(str(error))
 
-    facebook_ad_insights_data = response['data']
-    facebook_ad_insights_summary = response['summary']
+        try:
+            response = response['data']
+        except Exception as error:
+            log_exception(str(error))
 
-    if not facebook_ad_insights_data:
-        print(f'continue {ad_id}')
-        continue
+        campaign_ads = campaign_ads + response
 
-    data_list = []
-    for entry in facebook_ad_insights_data:
-        entry_dict = {}
-        entry_arr = ['ad_name', 'reach', 'impressions', 'spend', 'date_start', 'date_stop']
+    with open('facebook_ads_assets/facebook_ads_ids.json', 'w') as file:
+        json.dump(campaign_ads, file, indent=3)
 
-        for entry_arr_elem in entry_arr:
-            try:
-                entry_dict[entry_arr_elem] = entry[entry_arr_elem]
-            except Exception as error:
-                logging.exception("An exception occurred: ")
-                print(error, ad_id)
+    df = pd.DataFrame()
 
-            if entry_arr_elem in ['reach', 'impressions', 'spend']:
+    for ad_data in progressbar(campaign_ads):
+
+        ad_effective_status = ad_data['effective_status']
+        ad_adset_id = ad_data['adset_id']
+        ad_id = ad_data['id']
+
+        # ad_insights
+        # https://developers.facebook.com/docs/marketing-api/reference/ads-insights/#overview
+        # https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights#overview
+        url = f'https://graph.facebook.com/v17.0/{ad_id}/insights'
+        params = {
+            'default_summary': True,
+            'time_range[since]': time_range_since,
+            'time_range[until]': time_range_until,
+            'time_increment': 1,
+            'fields': 'ad_name, reach, impressions, attribution_setting, actions, cost_per_action_type, spend',
+            'access_token': access_token
+        }
+
+        response = requests.get(url, params=params).json()
+        r_count += 1
+        with open('facebook_ads_assets/facebook_ad_insights.json', 'w') as file:
+            json.dump(response, file, indent=3)
+
+        facebook_ad_insights_data = response['data']
+        facebook_ad_insights_summary = response['summary']
+
+        if not facebook_ad_insights_data:
+            print(f'continue {ad_id}')
+            continue
+
+        data_list = []
+        for entry in facebook_ad_insights_data:
+            entry_dict = {}
+            entry_arr = ['ad_name', 'reach', 'impressions', 'spend', 'date_start', 'date_stop']
+
+            for entry_arr_elem in entry_arr:
                 try:
-                    entry_dict[f'summary_{entry_arr_elem}'] = facebook_ad_insights_summary[entry_arr_elem]
+                    entry_dict[entry_arr_elem] = entry[entry_arr_elem]
                 except Exception as error:
-                    logging.exception("An exception occurred: ")
-                    print(error, ad_id, 'line 140')
+                    log_exception(str(error))
 
-        try:
-            for action in entry["actions"]:
-                entry_dict[f"actions_{action['action_type']}"] = action["value"]
+                if entry_arr_elem in ['reach', 'impressions', 'spend']:
+                    try:
+                        entry_dict[f'summary_{entry_arr_elem}'] = facebook_ad_insights_summary[entry_arr_elem]
+                    except Exception as error:
+                        log_exception(str(error))
 
-            for action in entry["cost_per_action_type"]:
-                entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
-        except Exception as error:
-            logging.exception("An exception occurred: ")
-            print(error, ad_id)
+            try:
+                for action in entry["actions"]:
+                    entry_dict[f"actions_{action['action_type']}"] = action["value"]
 
-        try:
-            data_list.append(entry_dict)
-        except Exception as error:
-            logging.exception("An exception occurred: ")
-            print(error, ad_id)
+                for action in entry["cost_per_action_type"]:
+                    entry_dict[f"cost_per_action_type_{action['action_type']}"] = action["value"]
+            except Exception as error:
+                log_exception(str(error))
 
-    df_ad_insights = pd.DataFrame(data_list)
-    df_ad_insights.insert(0, 'ad_id', ad_id)
+            try:
+                data_list.append(entry_dict)
+            except Exception as error:
+                log_exception(str(error))
 
-    df_ad_insights['effective_status'] = ad_effective_status
+        df_ad_insights = pd.DataFrame(data_list)
+        df_ad_insights.insert(0, 'ad_id', ad_id)
 
-    for ad_set_data in facebook_adsets_ids:
-        adset_id = ad_set_data['id']
-        adset_optimization_goal = ad_set_data['optimization_goal']
-        if ad_adset_id == adset_id:
-            df_ad_insights['optimization_goal'] = adset_optimization_goal
-            df_ad_insights['adset_id'] = adset_id
+        df_ad_insights['effective_status'] = ad_effective_status
 
-    # ad_creatives_id/ids
-    # https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
-    # https://developers.facebook.com/docs/marketing-api/reference/ad-creative/#overview
-    url = f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives'
-    params = {
-        'access_token': access_token
-    }
-    response = requests.get(url, params=params).json()
-    r_count += 1
+        for ad_set_data in facebook_adsets_ids:
+            adset_id = ad_set_data['id']
+            adset_optimization_goal = ad_set_data['optimization_goal']
+            if ad_adset_id == adset_id:
+                df_ad_insights['optimization_goal'] = adset_optimization_goal
+                df_ad_insights['adset_id'] = adset_id
 
-    with open('facebook_ads_assets/facebook_ad_creative_id_ids.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    ad_creative_id = response['data'][0]['id']
+        # ad_creatives_id/ids
+        # https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
+        # https://developers.facebook.com/docs/marketing-api/reference/ad-creative/#overview
+        url = f'https://graph.facebook.com/v17.0/{ad_id}/adcreatives'
+        params = {
+            'access_token': access_token
+        }
+        response = requests.get(url, params=params).json()
+        r_count += 1
 
-    # ad_creative
-    url = f'https://graph.facebook.com/v17.0/{ad_creative_id}/'
-    params = {
-        'fields': 'thumbnail_url',
-        'access_token': access_token
-    }
+        with open('facebook_ads_assets/facebook_ad_creative_id_ids.json', 'w') as file:
+            json.dump(response, file, indent=3)
+        ad_creative_id = response['data'][0]['id']
 
-    response = requests.get(url, params=params).json()
-    r_count += 1
-    with open('facebook_ads_assets/facebook_ad_creative.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    df_ad_insights['ad_creative_thumbnail_url'] = response['thumbnail_url']
+        # ad_creative
+        url = f'https://graph.facebook.com/v17.0/{ad_creative_id}/'
+        params = {
+            'fields': 'thumbnail_url',
+            'access_token': access_token
+        }
 
-    # ad_preview
-    # https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
-    url = f'https://graph.facebook.com/v17.0/{ad_id}/previews'
-    params = {
-        'ad_format': 'DESKTOP_FEED_STANDARD',
-        'access_token': user_access_token
-    }
+        response = requests.get(url, params=params).json()
+        r_count += 1
+        with open('facebook_ads_assets/facebook_ad_creative.json', 'w') as file:
+            json.dump(response, file, indent=3)
+        df_ad_insights['ad_creative_thumbnail_url'] = response['thumbnail_url']
 
-    response = requests.get(url, params=params).json()
-    r_count += 1
-    with open('facebook_ads_assets/facebook_ad_preview.json', 'w') as file:
-        json.dump(response, file, indent=3)
-    body = response['data'][0]['body']
-    link_start = body.find('src="') + 5
-    link_end = body.find('"', link_start)
-    ad_preview_link = body[link_start:link_end]
-    ad_preview_link = ad_preview_link.replace(';', '&')
-    df_ad_insights['ad_preview_link'] = ad_preview_link
+        # ad_preview
+        # https://developers.facebook.com/docs/marketing-api/reference/adgroup/previews#overview
+        url = f'https://graph.facebook.com/v17.0/{ad_id}/previews'
+        params = {
+            'ad_format': 'DESKTOP_FEED_STANDARD',
+            'access_token': user_access_token
+        }
 
-    df = pd.concat([df, df_ad_insights], ignore_index=True)
-    df.loc[df.duplicated(subset='summary_reach', keep='first'), 'summary_reach'] = np.nan
-    df.loc[df.duplicated(subset='summary_impressions', keep='first'), 'summary_impressions'] = np.nan
-    df.loc[df.duplicated(subset='summary_spend', keep='first'), 'summary_spend'] = np.nan
-    df['summary_reach'] = df['summary_reach'].fillna(0)
-    df['summary_impressions'] = df['summary_impressions'].fillna(0)
-    df['summary_spend'] = df['summary_spend'].fillna(0)
-    print(f'Ad {ad_id} done')
+        response = requests.get(url, params=params).json()
+        r_count += 1
+        with open('facebook_ads_assets/facebook_ad_preview.json', 'w') as file:
+            json.dump(response, file, indent=3)
+        body = response['data'][0]['body']
+        link_start = body.find('src="') + 5
+        link_end = body.find('"', link_start)
+        ad_preview_link = body[link_start:link_end]
+        ad_preview_link = ad_preview_link.replace(';', '&')
+        df_ad_insights['ad_preview_link'] = ad_preview_link
 
+        df = pd.concat([df, df_ad_insights], ignore_index=True)
 
-df = df.rename(columns=lambda x: x.replace('.', '_'))
-df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
+        cols_to_update = ['summary_reach', 'summary_impressions', 'summary_spend']
+        for col in cols_to_update:
+            df.loc[df.duplicated(subset=col, keep='first'), col] = np.nan
+            df[col] = df[col].fillna(0)
+
+        print(f'Ad {ad_id} done')
+
+    df = df.rename(columns=lambda x: x.replace('.', '_'))
+    df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
                             'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
-df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=False)
+    df.to_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv', index=False)
 
-
-# df = pd.read_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv')
-# table_name = f'{page_name}_facebook_ads_insights'
-# engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
-# inspector = sqlalchemy.inspect(engine)
-# if not inspector.has_table(table_name):
-#     df.head(0).to_sql(table_name, engine, if_exists='replace', index=False)
-# df.to_sql(table_name, engine, if_exists='replace', index=False)
-# print(f'{table_name} loaded to database')
+    # try:
+    #     df = pd.read_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv')
+    # except Exception as error:
+    #     log_exception(str(error))
+    #     continue
+    # table_name = f'{account_name}_facebook_ads_insights'
+    # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
+    # inspector = sqlalchemy.inspect(engine)
+    # if not inspector.has_table(table_name):
+    #     df.head(0).to_sql(table_name, engine, if_exists='replace', index=False)
+    # df.to_sql(table_name, engine, if_exists='replace', index=False)
+    # print(f'{table_name} loaded to database')
 
 
 end_time = time.time()
