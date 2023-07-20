@@ -40,8 +40,7 @@ with open('../resource/user_access_token.json', 'r') as file:
     user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
-with open('../resource/pages_access_tokens_2.json', 'r') as file:
-    pages_access_tokens_2 = json.load(file)
+
 
 effective_statuses = '["ACTIVE", \
                        "PAUSED", \
@@ -58,7 +57,7 @@ effective_statuses = '["ACTIVE", \
 r_count = 0
 
 
-for page in pages_access_tokens_2:
+for page in pages_access_tokens:
     account_name = page['account_name']
     business_entity_managing_ads_id = page['business_entity_managing_ads_id']
     access_token = page['access_token']
@@ -93,9 +92,6 @@ for page in pages_access_tokens_2:
     except Exception as error:
         log_exception(str(error))
 
-    with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
-        json.dump(response, file, indent=3)
-
     df = pd.DataFrame()
     actual_campaigns = []
 
@@ -126,7 +122,6 @@ for page in pages_access_tokens_2:
         facebook_campaign_insights_summary = response['summary']
 
         if not facebook_campaign_insights_data:
-            print('continue')
             continue
 
         data_list = []
@@ -197,13 +192,13 @@ for page in pages_access_tokens_2:
             df.loc[df.duplicated(subset=col, keep='first'), col] = np.nan
             df[col] = df[col].fillna(0)
 
-        print(f'Campaign {campaign_id} done')
+        # print(f'Campaign {campaign_id} done')
         actual_campaigns.append({
             "effective_status": campaign_effective_status,
             "id": campaign_id
         })
 
-    with open('actual_campaigns.json', 'w') as file:
+    with open(f'{account_name}_actual_campaigns.json', 'w') as file:
         json.dump(actual_campaigns, file, indent=3)
 
     df = df.rename(columns=lambda x: x.replace('.', '_'))

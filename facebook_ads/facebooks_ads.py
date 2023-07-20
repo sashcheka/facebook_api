@@ -30,18 +30,16 @@ def log_exception(exception_error):
     traceback_details = traceback.extract_tb(exc_traceback)
     _, lineno, _, _ = traceback_details[-1]
     logging.exception(f"An exception occurred: '{exception_error}' at line {lineno}")
-    print(f"An exception occurred: '{exception_error}' at line {lineno}")
+    # print(f"An exception occurred: '{exception_error}' at line {lineno}")
 
 
 # variables
 # https://supermetrics.com/api/getFields?ds=FA
-
 with open('../resource/user_access_token.json', 'r') as file:
     user_access_token = json.load(file)['user_access_token']
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
-with open('../resource/pages_access_tokens_2.json', 'r') as file:
-    pages_access_tokens_2 = json.load(file)
+
 
 effective_statuses = '["ACTIVE", \
                        "PAUSED", \
@@ -56,22 +54,20 @@ effective_statuses = '["ACTIVE", \
                        "WITH_ISSUES"]'
 
 
-# ads_sets_ids
-with open('facebook_adsets_ids.json', 'r') as file:
-    facebook_adsets_ids = json.load(file)
-
-
-with open('actual_campaigns.json', 'r') as file:
-    actual_campaigns = json.load(file)
-
 r_count = 0
 campaign_ads = []
 
 
-for page in pages_access_tokens_2:
+for page in pages_access_tokens:
     account_name = page['account_name']
     business_entity_managing_ads_id = page['business_entity_managing_ads_id']
     access_token = page['access_token']
+
+    with open(f'{account_name}_actual_campaigns.json', 'r') as file:
+        actual_campaigns = json.load(file)
+
+    if not actual_campaigns:
+        continue
 
     for campaign_data in actual_campaigns:
 
@@ -137,7 +133,7 @@ for page in pages_access_tokens_2:
         facebook_ad_insights_summary = response['summary']
 
         if not facebook_ad_insights_data:
-            print(f'continue {ad_id}')
+            # print(f'continue {ad_id}')
             continue
 
         data_list = []
@@ -176,12 +172,19 @@ for page in pages_access_tokens_2:
 
         df_ad_insights['effective_status'] = ad_effective_status
 
-        for ad_set_data in facebook_adsets_ids:
-            adset_id = ad_set_data['id']
-            adset_optimization_goal = ad_set_data['optimization_goal']
-            if ad_adset_id == adset_id:
-                df_ad_insights['optimization_goal'] = adset_optimization_goal
-                df_ad_insights['adset_id'] = adset_id
+        # optimization_goal from ad_set
+        # https://developers.facebook.com/docs/marketing-api/reference/ad-campaign/#read-examples
+        url = f'https://graph.facebook.com/v17.0/{ad_adset_id}'
+
+        params = {
+            'time_range[since]': time_range_since,
+            'time_range[until]': time_range_until,
+            'fields': 'optimization_goal',
+            'access_token': access_token
+        }
+
+        response = requests.get(url, params=params).json()
+        df_ad_insights['optimization_goal'] = response['optimization_goal']
 
         # ad_creatives_id/ids
         # https://developers.facebook.com/docs/marketing-api/reference/adgroup/adcreatives/#overview
@@ -236,7 +239,7 @@ for page in pages_access_tokens_2:
             df.loc[df.duplicated(subset=col, keep='first'), col] = np.nan
             df[col] = df[col].fillna(0)
 
-        print(f'Ad {ad_id} done')
+        # print(f'Ad {ad_id} done')
 
     df = df.rename(columns=lambda x: x.replace('.', '_'))
     df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
