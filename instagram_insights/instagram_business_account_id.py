@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 with open('../resource/app_access_token.json', 'r') as file:
@@ -6,8 +7,8 @@ with open('../resource/app_access_token.json', 'r') as file:
 with open('../resource/pages_access_tokens.json', 'r') as file:
     pages_access_tokens = json.load(file)
 
-access_token = app_access_token['access_token']
-page_id = pages_access_tokens['galereyavkusaby']['page_id']
+access_token = app_access_token.........
+page_id = pages_access_tokens..........
 instagram_business_account_id = '17841403111140815'
 
 url = f"https://graph.facebook.com/v17.0/{page_id}?fields=instagram_business_account"
