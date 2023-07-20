@@ -133,7 +133,6 @@ for page in pages_access_tokens:
         facebook_ad_insights_summary = response['summary']
 
         if not facebook_ad_insights_data:
-            # print(f'continue {ad_id}')
             continue
 
         data_list = []
@@ -250,6 +249,7 @@ for page in pages_access_tokens:
     #     df = pd.read_csv('facebook_ads_assets/facebook_ad_insights_df_ad_insights.csv')
     # except Exception as error:
     #     log_exception(str(error))
+    #     campaign_ads = []
     #     continue
     # table_name = f'{account_name}_facebook_ads_insights'
     # engine = sqlalchemy.create_engine("mariadb+mariadbconnector://fb:yaro1997dobrg*M@173.249.18.74:3306/facebook_api")
@@ -258,6 +258,7 @@ for page in pages_access_tokens:
     #     df.head(0).to_sql(table_name, engine, if_exists='replace', index=False)
     # df.to_sql(table_name, engine, if_exists='replace', index=False)
     # print(f'{table_name} loaded to database')
+    # campaign_ads = []
 
 
 end_time = time.time()

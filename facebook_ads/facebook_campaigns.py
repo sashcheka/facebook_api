@@ -92,6 +92,9 @@ for page in pages_access_tokens:
     except Exception as error:
         log_exception(str(error))
 
+    with open('facebook_campaings_assets/facebook_campaigns_ids.json', 'w') as file:
+        json.dump(response, file, indent=3)
+
     df = pd.DataFrame()
     actual_campaigns = []
 
@@ -122,6 +125,7 @@ for page in pages_access_tokens:
         facebook_campaign_insights_summary = response['summary']
 
         if not facebook_campaign_insights_data:
+            print('continue')
             continue
 
         data_list = []
@@ -192,7 +196,6 @@ for page in pages_access_tokens:
             df.loc[df.duplicated(subset=col, keep='first'), col] = np.nan
             df[col] = df[col].fillna(0)
 
-        # print(f'Campaign {campaign_id} done')
         actual_campaigns.append({
             "effective_status": campaign_effective_status,
             "id": campaign_id
@@ -200,10 +203,11 @@ for page in pages_access_tokens:
 
     with open(f'{account_name}_actual_campaigns.json', 'w') as file:
         json.dump(actual_campaigns, file, indent=3)
+    actual_campaigns = []
 
     df = df.rename(columns=lambda x: x.replace('.', '_'))
     df = df.rename(columns={'cost_per_action_type_onsite_conversion_messaging_conversation_started_7d':
-                            'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
+                                'cost_per_action_type_onsite_conv_mes_conv_started_7d'})
     df.fillna('0', inplace=True)
     df.to_csv('facebook_campaings_assets/facebook_campaign_insights_df_campaign_insights.csv', index=False)
 
