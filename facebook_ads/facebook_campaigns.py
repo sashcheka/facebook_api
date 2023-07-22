@@ -30,7 +30,7 @@ def log_exception(exception_error):
     traceback_details = traceback.extract_tb(exc_traceback)
     _, lineno, _, _ = traceback_details[-1]
     logging.exception(f"An exception occurred: '{exception_error}' at line {lineno}")
-    print(f"An exception occurred: '{exception_error}' at line {lineno}")
+    # print(f"An exception occurred: '{exception_error}' at line {lineno}")
 
 
 # variables
@@ -125,7 +125,6 @@ for page in pages_access_tokens:
         facebook_campaign_insights_summary = response['summary']
 
         if not facebook_campaign_insights_data:
-            print('continue')
             continue
 
         data_list = []
