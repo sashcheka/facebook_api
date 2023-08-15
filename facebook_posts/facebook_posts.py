@@ -40,10 +40,10 @@ page_last_post_id = facebook_page_posts[0]['id']
 
 url = f'https://graph.facebook.com/{page_last_post_id}/insights'
 params = {
-    'metric': 'post_reactions_like_total, page_post_engagements',
+    'metric': 'Post Total Reach, post_reactions_like_total',
     'access_token': access_token
 }
 
 response = requests.get(url, params=params).json()
-with open('facebook_post_insights_by_day.json', 'w') as file:
+with open('facebook_post_insights.json', 'w') as file:
     json.dump(response, file, indent=3)
